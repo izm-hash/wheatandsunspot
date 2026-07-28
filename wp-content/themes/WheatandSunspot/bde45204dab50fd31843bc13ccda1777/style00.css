@@ -1,0 +1,883 @@
+@charset 'UTF-8';
+
+/* 
+Theme Name: wheat and sunny spot
+Description: 架空サイトのためのオリジナルテーマ
+*/
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color */
+    --basecolor: #FFF2DD;
+    --maincolor: #E2A995;
+    --accentcolor: #7450F5;
+    --textcolor: #5E2E04;
+    --white: #FFFAFA;
+    --gray: #D9D9D9;
+
+    /* Font */
+    --main-font: 'Zen Maru Gothic', sans-serif;
+    --serif-font: 'Shippori Mincho', serif;
+    --text-font: 'Noto Sans JP', sans-serif;
+
+}
+
+/* ==========================================
+   Topページ（固定ページ）共通部分
+========================================== */
+body {
+    background-color: var(--basecolor);
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: var(--serif-font);
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: var(--main-font);
+    text-align: center;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: var(--main-font);
+}
+
+p {
+    font-family: var(--text-font);
+}
+
+h1,
+h2,
+h3,
+p {
+    color: var(--textcolor);
+}
+
+.bule-purple-text {
+    color: var(--accentcolor);
+}
+
+.big-text {
+    font-size: 2rem;
+}
+
+.h2-1 {
+    font-size: 24px;
+    ;
+}
+
+img {
+    width: 100%;
+}
+
+iframe {
+    width: 100%;
+    height: 30vh;
+}
+
+a {
+    color: #D4B16A;
+    text-decoration: none;
+}
+
+a:hover,
+a:active {
+    color: var(--accentcolor);
+}
+
+
+/* 丸いボタン */
+.button-circle {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: #21164A;
+    line-height: 1.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto 0;
+}
+
+.btn-inner {
+    border-radius: 50%;
+    width: 73px;
+    height: 73px;
+    border: solid 1px #D4B16A;
+    color: #D4B16A;
+    padding-top: 0.5rem;
+    font-family: var(--serif-font);
+    text-align: center;
+}
+
+/* 各セクション上のマージン */
+.KV {
+    margin-top: 3rem;
+}
+
+.season-menu,
+.sns h2,
+.about-us h2,
+.news h2,
+.shop h2,
+.access h2 {
+    margin-top: 5rem;
+}
+
+/* ヘッダー */
+.logo {
+    width: 100%;
+    height: 200px;
+    background-color: #E2A995;
+    display: flex;
+    justify-content: center;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    margin: 5rem 0.5rem 0;
+}
+
+.logo-text {
+    margin-top: 5rem;
+}
+
+.logo-text p {
+    font-size: 10px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.logo span {
+    font-size: 20px;
+}
+
+/* ハンバーガーメニュー */
+.hamburger {
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--white);
+    cursor: pointer;
+    z-index: 10;
+    /* 中にある子要素を、上から下へ縦一列にきれいに並べる */
+    display: flex;
+    /* 強制的に上から下への縦並び */
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+.hamburger span {
+    display: block;
+    /* ×がずれるので一度同じ位置に集める */
+    position: absolute;
+    height: 2px;
+    width: 16px;
+    background-color: var(--textcolor);
+    margin: 0;
+    /* ズレ防止 */
+    transition: 0.5s;
+}
+
+.hamburger span:nth-child(1) {
+    transform: translateY(-5px);
+    /* 1本目を上にずらす */
+}
+
+.hamburger span:nth-child(3) {
+    transform: translateY(5px);
+    /* 3本目を下にずらす */
+}
+
+/* メニューのスタイル */
+.menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 80%;
+    border-radius: 20px 0 0 20px;
+    background-color: var(--textcolor);
+    opacity: 0;
+    /* 初期状態は透明 */
+    pointer-events: none;
+    /* クリック不可 */
+    transition: opacity 0.5s ease;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 5;
+    line-height: 2;
+    color: var(--white);
+}
+
+.menu ul li:first-child {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--basecolor);
+    margin-bottom: 20px;
+}
+
+.menu ul li .small-text {
+    font-size: 0.75rem;
+}
+
+/* メニューが開いたとき */
+.menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    /* クリック可能にする */
+}
+
+/* バツ印に変わるハンバーガーボタン */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(0px) rotate(45deg);
+}
+
+/* 真ん中の線*/
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(0px) rotate(-45deg)
+}
+
+/* KV */
+.KV {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+.KV img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+/* 画像に縦書き文字入れる */
+.vertical-text {
+    font-family: var(--serif-font);
+    color: var(--white);
+    font-weight: lighter;
+    width: auto;
+    height: 220px;
+    background-color: #9e909093;
+    writing-mode: vertical-rl;
+    position: absolute;
+    top: 125px;
+    right: 33px;
+    transform: translateY(-50%);
+}
+
+.second-text {
+    height: 220px;
+    position: absolute;
+    top: 125px;
+    right: 245px;
+
+}
+
+.third-text {
+    height: 200px;
+    position: absolute;
+    top: 142px;
+    right: 275px;
+}
+
+
+
+/* 季節のメニュー */
+.season-menu-inner {
+    text-align: center;
+}
+
+
+.banner {
+    display: block;
+    width: 200px;
+    margin: 2rem auto 0;
+}
+
+.season-menu-item {
+    margin-top: 4rem;
+}
+
+.season-menu-item img {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    border-radius: 3px;
+}
+
+.season-menu-item p {
+    margin: 1rem auto 0;
+    line-height: 1.5;
+    display: block;
+    width: 95%;
+}
+
+/* SNS */
+.sns img {
+    display: block;
+    margin: auto;
+    margin-top: 2rem;
+    width: 50%;
+    height: auto;
+}
+
+/* about us */
+.about-us-inner {
+    position: relative;
+    display: inline-block;
+}
+
+.appointment-img {
+    display: block;
+    width: 50%;
+    height: auto;
+    margin-top: 2rem;
+}
+
+.about-us-p img {
+    width: 25px;
+    height: 25px;
+
+}
+
+.about-us-p p {
+    color: var(--white);
+}
+
+.about-us-p {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    left: 5px;
+    margin: 0;
+    z-index: 4;
+}
+
+.p1 {
+    top: 63px;
+}
+
+.p2 {
+    top: 116px;
+}
+
+.p3 {
+    top: 181px;
+}
+
+.recruit-banner {
+    width: 60%;
+    display: block;
+    margin: 3rem auto 0;
+}
+
+/* お知らせ */
+/* .news-card {
+    margin-top: 2rem;
+}
+
+.news-card time,
+.news-card h3,
+.news-card p,
+.and-more {
+    display: block;
+    width: 95%;
+    margin: 1rem auto 0;
+}
+ */
+
+.news p {
+    margin: 1.5rem 0 1rem;
+}
+
+.news .more-read {
+    margin-bottom: 1rem;
+}
+
+.top-news-card {
+    border-bottom: 1px solid var(--textcolor);
+}
+
+.single-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 80px;
+}
+
+/* 店舗情報 */
+.shop {
+    text-align: center;
+}
+
+.logo-img {
+    width: 100px;
+    height: 100px;
+    margin-top: 2rem;
+}
+
+.shop p {
+    line-height: 1.5;
+}
+
+address {
+    color: var(--textcolor);
+    margin-top: 1rem;
+}
+
+.shop h3:nth-of-type(2) {
+    margin: 2rem 0 1rem;
+}
+
+.shop p:nth-of-type(5) {
+    margin-bottom: 1rem;
+}
+
+.shop p:last-of-type {
+    margin-bottom: 2rem;
+}
+
+/* アクセス */
+.access {
+    text-align: center;
+    line-height: 1.5;
+}
+
+.access h2 {
+    margin-bottom: 1rem;
+}
+
+.access iframe {
+    margin: 1.5rem 0 2rem;
+}
+
+/* フッター */
+footer {
+    width: 100%;
+    height: 150px;
+    background-color: #E2A995;
+    text-align: center;
+}
+
+footer .logo {
+    width: 100%;
+    height: 45px;
+
+}
+
+footer a {
+    display: flex;
+}
+
+footer .logo img {
+    width: 40px;
+    height: 40px;
+    margin-top: 2rem;
+}
+
+footer .logo-text {
+    margin-top: 2rem;
+}
+
+footer .logo-text h3 {
+    font-family: var(--serif-font);
+    text-align: center;
+}
+
+footer .logo .logo-text p {
+    font-size: 10px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+/* SNSアイコン */
+.sns-icons svg {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+}
+
+svg path {
+    fill: var(--textcolor);
+    /* SVGの色変更 */
+}
+
+.sns-icons {
+    display: flex;
+    width: 60px;
+    margin: 2rem auto 1.5rem;
+    color: var(--textcolor);
+}
+
+footer small {
+    font-size: 8px;
+
+}
+
+
+/* ==========================================
+  アニメーション
+========================================== */
+
+/* KV */
+/* 最初に表示されるときのアニメーション設定 */
+.vertical-text {
+    animation: fadeInUp 1.5s ease-out forwards;
+    opacity: 0;
+    /* 最初は透明にしておく */
+}
+
+/* 2行目の文字えお少し遅らせて表示 */
+.second-text {
+    animation-delay: 0.5s;
+}
+
+/* 3行目をさらに遅らせる */
+.third-text {
+    animation-delay: 1s;
+}
+
+/* ふわっと浮かび上がる動きの定義 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(calc(-50% + 20px));
+        /* 現在の位置より20px下 */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-50%);
+        /* 元の位置に戻る */
+    }
+}
+
+/* すべてのh2 */
+/* 初期状態（アニメーション前） */
+h2 {
+    opacity: 0;
+    transform: translateX(-30px);
+    /* 最初は左に30pxずらしておく */
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+/* JavaScriptで「active」クラスがついた時の状態（アニメーション後） */
+h2.active {
+    opacity: 1;
+    transform: translateX(0);
+    /* 元の位置に戻る */
+}
+
+
+/* ==========================================
+   スタッフ募集ページ（固定ページ）
+========================================== */
+.recruit-page-title {
+    margin-top: 3rem;
+}
+
+.recruit-gallery-section {
+    position: relative;
+    width: 95%;
+    margin: 3rem auto;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery-grid {
+    display: grid;
+    /* 横に3マス、縦に2マスの網目（グリッド）を作る */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 140px);
+    /* 1マスの高さ140px */
+    gap: 0;
+
+}
+
+/* すべての写真ブロックの共通設定（枠内に写真を綺麗に収める） */
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.item-1 {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+}
+
+.item-2 {
+    grid-column: 3 / 4;
+    grid-row: 1 / 3;
+}
+
+.item-3 {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+}
+
+/* 写真の上に重なるキャッチコピー */
+.gallery-copy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+    color: var(--white);
+    font-family: var(--serif-font);
+    font-size: 1rem;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.gallery-grid::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+.recruit-table-full {
+    width: 95%;
+    margin: 3rem auto;
+    border-collapse: collapse;
+    background-color: rgba(255, 250, 250, 0.9);
+    border: 1px solid var(--textcolor);
+    font-size: 0.9rem;
+}
+
+.recruit-table-full th,
+.recruit-table-full td {
+    padding: 12px 10px;
+    border: 1px solid var(--textcolor);
+    vertical-align: top;
+}
+
+.recruit-table-full th {
+    width: 28%;
+    background-color: rgba(226, 169, 149, 0.2);
+    color: var(--textcolor);
+    font-family: var(--main-font);
+    text-align: center;
+}
+
+.recruit-table-full td ul {
+    padding-left: 18px;
+}
+
+.text-muted {
+    font-size: 0.75rem;
+    color: #8c7662;
+    margin-top: 5px;
+}
+
+ul li {
+    color: var(--textcolor);
+}
+
+.flow {
+    text-align: center;
+}
+
+ol {
+    width: 95%;
+    margin: 2rem auto;
+    padding-left: 20px;
+    color: var(--textcolor);
+    font-family: var(--text-font);
+    line-height: 1.8;
+
+}
+
+ol li {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--textcolor);
+    list-style-type: decimal;
+    text-align: left;
+}
+
+ol li p {
+    font-size: 0.8rem;
+
+    margin-top: 4px;
+}
+
+.recruit-table-full ul {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+
+.tel {
+    width: 95%;
+    margin: 3rem auto;
+    padding: 1.5rem;
+    display: flex;
+    border-bottom: 2px dashed var(--maincolor);
+    text-align: center;
+    color: var(--textcolor);
+}
+
+.tel-p {
+    display: block;
+}
+
+.tel img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+}
+
+.tel p:nth-of-type(1) {
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: var(--main-font);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.tel p:nth-of-type(2) {
+    font-size: 0.85rem;
+}
+
+
+.recruit-form-section {
+    width: 95%;
+    margin: 2rem auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px 15px;
+    border-radius: 12px;
+    border: 1px solid var(--maincolor);
+}
+
+.recruit-form-section h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: var(--textcolor);
+}
+
+/* プラグインの入力欄にも効くようにセレクタを包括 */
+.form-group input,
+.form-group select,
+.form-group textarea,
+.wpcf7-form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--maincolor);
+    border-radius: 6px;
+    background-color: var(--white);
+    font-size: 0.9rem;
+    color: var(--textcolor);
+    box-sizing: border-box;
+}
+
+
+.form-submit {
+    text-align: center;
+}
+
+.btn-submit,
+.wpcf7-submit {
+    background-color: #21164A;
+    color: #D4B16A;
+    border: none;
+    padding: 12px 45px;
+    font-size: 1rem;
+    font-family: var(--serif-font);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover,
+.wpcf7-submit:hover {
+    background-color: var(--accentcolor);
+    color: var(--white);
+}
+
+/* ==========================================
+   季節商品ページ（固定ページ）
+========================================== */
+.summer h2 {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* ==========================================
+   お知らせページ（固定ページ）
+========================================== */
+.news h2 {
+    text-align: center;
+}
+
+.news img {
+    width: 100%;
+    height: 230px;
+}
+
+.news-card {
+    border-bottom: 1px solid var(--textcolor);
+    padding: 40px 0;
+}
+
+/* ==========================================
+   お知らせページ（投稿ページ）
+========================================== */
+.single-news img {
+    margin: 2rem 0;
+}
+
+.single-news h3,
+.single-news p {
+    margin-bottom: 1.5rem;
+}
+
+.single-news .button-circle {
+    margin-bottom: 2rem;
+}

@@ -1,0 +1,1072 @@
+@charset 'UTF-8';
+
+/* 
+Theme Name: wheat and sunny spot
+Description: 架空サイトのためのオリジナルテーマ
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color */
+    --basecolor: #FFF2DD;
+    --maincolor: #E2A995;
+    --accentcolor: #7450F5;
+    --textcolor: #5E2E04;
+    --white: #FFFAFA;
+    --gray: #D9D9D9;
+
+    /* Font */
+    --main-font: 'Zen Maru Gothic', sans-serif;
+    --serif-font: 'Shippori Mincho', serif;
+    --text-font: 'Noto Sans JP', sans-serif;
+}
+
+/* ==========================================
+   Topページ（固定ページ）共通部分
+========================================== */
+body {
+    background-color: var(--basecolor);
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: var(--serif-font);
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: var(--main-font);
+    text-align: center;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: var(--main-font);
+}
+
+p {
+    font-family: var(--text-font);
+}
+
+h1,
+h2,
+h3,
+p {
+    color: var(--textcolor);
+}
+
+.bule-purple-text {
+    color: var(--accentcolor);
+}
+
+.big-text {
+    font-size: 2rem;
+}
+
+.h2-1 {
+    font-size: 24px;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 
+  WordPressのエディタから出力される画像ブロックのサイズ崩れを防ぐ
+  （WordPress 6.7以降の sizes="auto" 対策）
+*/
+.wp-block-image img {
+    width: 100%;
+    height: auto;
+}
+
+iframe {
+    width: 100%;
+    height: 30vh;
+}
+
+a {
+    color: #D4B16A;
+    text-decoration: none;
+    display: contents;
+}
+
+a:hover,
+a:active {
+    color: var(--accentcolor);
+}
+
+/* 丸いボタン */
+.button-circle {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: #21164A;
+    line-height: 1.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto 0;
+}
+
+.btn-inner {
+    border-radius: 50%;
+    width: 73px;
+    height: 73px;
+    border: solid 1px #D4B16A;
+    color: #D4B16A;
+    padding-top: 0.5rem;
+    font-family: var(--serif-font);
+    text-align: center;
+}
+
+/* 各セクション上のマージン */
+.KV {
+    margin-top: 3rem;
+}
+
+.season-menu,
+.sns h2,
+.about-us h2,
+.news h2,
+.shop h2,
+.access h2 {
+    margin-top: 5rem;
+}
+
+/* ヘッダー（ロゴ・ブランドネーム）*/
+.logo {
+    width: 100%;
+    min-height: 180px;
+    background-color: var(--maincolor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    margin: 0 1rem 0 0;
+}
+
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.logo-text p {
+    font-size: 11px;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+}
+
+
+.logo span {
+    font-size: 22px;
+    font-family: var(--serif-font);
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+
+/* ハンバーガーメニュー */
+.hamburger {
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--white);
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+.hamburger span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 16px;
+    background-color: var(--textcolor);
+    margin: 0;
+    transition: 0.5s;
+}
+
+.hamburger span:nth-child(1) {
+    transform: translateY(-5px);
+}
+
+.hamburger span:nth-child(3) {
+    transform: translateY(5px);
+}
+
+/* メニューのスタイル */
+.menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 80%;
+    border-radius: 20px 0 0 20px;
+    background-color: var(--textcolor);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 5;
+    line-height: 2;
+    color: var(--white);
+}
+
+.menu ul li:first-child {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--basecolor);
+    margin-bottom: 20px;
+}
+
+.menu ul li .small-text {
+    font-size: 0.75rem;
+}
+
+/* メニューが開いたとき */
+.menu.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* バツ印に変わるハンバーガーボタン */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(0px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(0px) rotate(-45deg);
+}
+
+/* KV */
+.KV {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+.KV img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+/* 画像に縦書き文字入れる */
+.vertical-text {
+    font-family: var(--serif-font);
+    color: var(--white);
+    font-weight: lighter;
+    width: auto;
+    height: auto;
+    background-color: rgba(158, 144, 144, 0.58);
+    writing-mode: vertical-rl;
+    position: absolute;
+    top: 125px;
+    transform: translateY(-50%);
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.first-text {
+    right: 33px;
+}
+
+.second-text {
+    right: 245px;
+}
+
+.third-text {
+    top: 142px;
+    right: 275px;
+}
+
+/* 季節のメニュー */
+.season-menu-inner {
+    text-align: center;
+}
+
+.banner {
+    display: block;
+    width: 200px;
+    margin: 2rem auto 0;
+}
+
+.season-menu-item {
+    margin-top: 4rem;
+}
+
+.season-menu-item img {
+    display: block;
+    width: 80%;
+    margin: 0 auto 1.5rem;
+    border-radius: 3px;
+}
+
+.season-menu-item p {
+    margin: 1rem auto 0;
+    line-height: 1.5;
+    display: block;
+    width: 95%;
+}
+
+/* SNS */
+.sns img {
+    display: block;
+    margin: 2rem auto auto;
+    width: 50%;
+    height: auto;
+}
+
+/* about us */
+.about-us {
+    text-align: center;
+    width: 100%;
+}
+
+.about-us-inner {
+    position: relative;
+    display: block;
+    width: 90%;
+    margin: 2rem auto 0;
+}
+
+.appointment-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    border-radius: 4px;
+}
+
+.about-us-p {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 4;
+}
+
+.about-us-p img {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.about-us-p p {
+    color: var(--white);
+    font-size: 13px;
+    text-align: left;
+    line-height: 1.4;
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.p1 {
+    top: 15%;
+}
+
+.p2 {
+    top: 40%;
+}
+
+.p3 {
+    top: 68%;
+}
+
+.recruit-banner-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.recruit-banner {
+    width: 60%;
+    height: auto;
+    display: block;
+}
+
+/* お知らせ */
+.news p {
+    margin: 1.5rem 0 1rem;
+}
+
+.news .more-read {
+    margin-bottom: 1rem;
+}
+
+.top-news-card {
+    border-bottom: 1px solid var(--textcolor);
+}
+
+.single-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 80px;
+}
+
+/* 店舗情報（ */
+.shop {
+    text-align: center;
+}
+
+.logo-img {
+    width: 100px;
+    height: 100px;
+    margin-top: 2rem;
+}
+
+.shop p {
+    line-height: 1.5;
+}
+
+address {
+    color: var(--textcolor);
+    margin-top: 1rem;
+}
+
+.shop h3:nth-of-type(2) {
+    margin: 2rem 0 1rem;
+}
+
+.shop p:nth-of-type(5) {
+    margin-bottom: 1rem;
+}
+
+.shop p:last-of-type {
+    margin-bottom: 2rem;
+}
+
+/* アクセス */
+.access {
+    text-align: center;
+    line-height: 1.5;
+}
+
+.access h2 {
+    margin-bottom: 1rem;
+}
+
+.access iframe {
+    margin: 1.5rem 0 2rem;
+}
+
+/* フッター */
+footer {
+    width: 100%;
+    padding-bottom: 2rem;
+    background-color: #E2A995;
+    text-align: center;
+}
+
+footer .logo {
+    width: 100%;
+}
+
+footer a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer .logo img {
+    width: 40px;
+    height: 40px;
+    margin-top: 0.5rem;
+}
+
+footer .logo-text {
+    margin-left: 10px;
+}
+
+footer .logo-text h3 {
+    font-family: var(--serif-font);
+    text-align: center;
+    margin: 0;
+}
+
+footer .logo .logo-text p {
+    font-size: 10px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+/* SNSアイコン */
+.sns-icons svg {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+}
+
+svg path {
+    fill: var(--textcolor);
+    /* SVGの色変更 */
+}
+
+.sns-icons {
+    display: flex;
+    width: 60px;
+    margin: 1.5rem auto 1rem;
+    color: var(--textcolor);
+}
+
+footer small {
+    font-size: 8px;
+
+}
+
+/* ==========================================
+  PC・タブレット向けのスタイル（画面幅768px以上）
+========================================== */
+@media (min-width: 768px) {
+    main {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .season-menu,
+    .sns h2,
+    .about-us h2,
+    .news h2,
+    .shop h2,
+    .access h2 {
+        margin-top: 8rem;
+    }
+
+    /* KV */
+    .KV img {
+        min-width: 100%;
+        min-height: 600px;
+    }
+
+    .vertical-text {
+        font-size: 2rem;
+        top: 295px !important;
+
+    }
+
+    .first-text {
+        right: 265px;
+
+
+    }
+
+    .second-text {
+        right: 1200px;
+
+    }
+
+    .third-text {
+        right: 1300px;
+
+    }
+
+    /* about us */
+    .about-us-inner {
+        position: relative;
+        display: block;
+        width: 100%;
+        max-width: 800px;
+        margin: 3rem auto 0;
+        padding: 4% 6%;
+        border: 2px solid var(--white);
+    }
+
+    .appointment-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin-top: 0;
+        z-index: 1;
+    }
+
+    .about-us-p {
+        position: relative;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100%;
+        max-width: 550px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 2.5rem;
+        z-index: 2;
+    }
+
+    .about-us-p:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .about-us-p img {
+        width: 32px;
+        height: 32px;
+        filter: brightness(0) invert(1);
+    }
+
+    .about-us-p p {
+        color: var(--white);
+        font-size: 1.15rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        line-height: 1.6;
+    }
+
+    /* 求人バナー */
+    .recruit-banner-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 4rem;
+    }
+
+    .recruit-banner {
+        width: 40%;
+    }
+
+    /* お知らせ */
+    .top-news-card {
+        max-width: 700px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 0;
+    }
+
+    .news p {
+        margin: 0;
+    }
+
+    /* 店舗情報 */
+    .shop {
+        max-width: 600px;
+        margin: 8rem auto 0;
+        text-align: center;
+    }
+
+    .shop h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .logo-img {
+        margin: 0 auto 1.5rem;
+        width: 100px;
+        height: 100px;
+    }
+
+    .shop h3 {
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .shop p {
+        margin-bottom: 0.5rem;
+    }
+
+    .shop img:last-of-type {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        margin: 3rem auto 0;
+        display: block;
+    }
+
+    /* アクセス */
+    .access {
+        max-width: 600px;
+        margin: 8rem auto 0;
+        text-align: center;
+    }
+
+    .access p {
+        margin-bottom: 0.5rem;
+    }
+
+    .access iframe {
+        width: 100%;
+        max-width: 500px;
+        height: 350px;
+        margin: 2rem auto 0;
+        display: block;
+    }
+}
+
+
+
+/* ==========================================
+  アニメーション
+========================================== */
+.vertical-text {
+    animation: fadeInUp 1.5s ease-out forwards;
+    opacity: 0;
+}
+
+.second-text {
+    animation-delay: 0.5s;
+}
+
+.third-text {
+    animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(calc(-50% + 20px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+}
+
+/* ==========================================
+   スタッフ募集ページ（固定ページ）
+========================================== */
+.recruit-page-title {
+    margin-top: 3rem;
+}
+
+.recruit-gallery-section {
+    position: relative;
+    width: 95%;
+    margin: 3rem auto;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery-grid {
+    display: grid;
+    /* 横に3マス、縦に2マスの網目（グリッド）を作る */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 140px);
+    /* 1マスの高さ140px */
+    gap: 0;
+
+}
+
+/* すべての写真ブロックの共通設定（枠内に写真を綺麗に収める） */
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.item-1 {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+}
+
+.item-2 {
+    grid-column: 3 / 4;
+    grid-row: 1 / 3;
+}
+
+.item-3 {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+}
+
+/* 写真の上に重なるキャッチコピー */
+.gallery-copy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+    color: var(--white);
+    font-family: var(--serif-font);
+    font-size: 1rem;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.gallery-grid::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+.recruit-table-full {
+    width: 95%;
+    margin: 3rem auto;
+    border-collapse: collapse;
+    background-color: rgba(255, 250, 250, 0.9);
+    border: 1px solid var(--textcolor);
+    font-size: 0.9rem;
+}
+
+.recruit-table-full th,
+.recruit-table-full td {
+    padding: 12px 10px;
+    border: 1px solid var(--textcolor);
+    vertical-align: top;
+}
+
+.recruit-table-full th {
+    width: 28%;
+    background-color: rgba(226, 169, 149, 0.2);
+    color: var(--textcolor);
+    font-family: var(--main-font);
+    text-align: center;
+}
+
+.recruit-table-full td ul {
+    padding-left: 18px;
+}
+
+.text-muted {
+    font-size: 0.75rem;
+    color: #8c7662;
+    margin-top: 5px;
+}
+
+ul li {
+    color: var(--textcolor);
+}
+
+.flow {
+    text-align: center;
+}
+
+ol {
+    width: 95%;
+    margin: 2rem auto;
+    padding-left: 20px;
+    color: var(--textcolor);
+    font-family: var(--text-font);
+    line-height: 1.8;
+
+}
+
+ol li {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--textcolor);
+    list-style-type: decimal;
+    text-align: left;
+}
+
+ol li p {
+    font-size: 0.8rem;
+
+    margin-top: 4px;
+}
+
+.recruit-table-full ul {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+
+.tel {
+    width: 95%;
+    margin: 3rem auto;
+    padding: 1.5rem;
+    display: flex;
+    border-bottom: 2px dashed var(--maincolor);
+    text-align: center;
+    color: var(--textcolor);
+}
+
+.tel-p {
+    display: block;
+}
+
+.tel img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+}
+
+.tel p:nth-of-type(1) {
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: var(--main-font);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.tel p:nth-of-type(2) {
+    font-size: 0.85rem;
+}
+
+
+.recruit-form-section {
+    width: 95%;
+    margin: 2rem auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px 15px;
+    border-radius: 12px;
+    border: 1px solid var(--maincolor);
+}
+
+.recruit-form-section h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: var(--textcolor);
+}
+
+/* プラグインの入力欄にも効くようにセレクタを包括 */
+.form-group input,
+.form-group select,
+.form-group textarea,
+.wpcf7-form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--maincolor);
+    border-radius: 6px;
+    background-color: var(--white);
+    font-size: 0.9rem;
+    color: var(--textcolor);
+    box-sizing: border-box;
+}
+
+
+.form-submit {
+    text-align: center;
+}
+
+.btn-submit,
+.wpcf7-submit {
+    background-color: #21164A;
+    color: #D4B16A;
+    border: none;
+    padding: 12px 45px;
+    font-size: 1rem;
+    font-family: var(--serif-font);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover,
+.wpcf7-submit:hover {
+    background-color: var(--accentcolor);
+    color: var(--white);
+}
+
+/* ==========================================
+   季節商品ページ（固定ページ）
+========================================== */
+.summer h2 {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.summer img {
+    width: 98%;
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: 2rem auto;
+}
+
+.summer .button-circle {
+    margin-bottom: 2rem;
+}
+
+.summer img.wp-image-62 {
+    width: 90%;
+    max-width: 780px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 1.5rem auto;
+}
+
+/* ==========================================
+   お知らせページ（固定ページ）
+========================================== */
+.news h2 {
+    text-align: center;
+}
+
+.news img {
+    width: 100%;
+    height: 230px;
+}
+
+.news-card {
+    border-bottom: 1px solid var(--textcolor);
+    padding: 40px 0;
+}
+
+/* ==========================================
+   お知らせページ（投稿ページ）
+========================================== */
+.single-news img {
+    margin: 2rem 0;
+}
+
+.single-news h3,
+.single-news p {
+    margin-bottom: 1.5rem;
+}
+
+.single-news .button-circle {
+    margin-bottom: 2rem;
+}

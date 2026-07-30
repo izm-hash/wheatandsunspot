@@ -1048,6 +1048,7 @@ ol li p {
 .news img {
     width: 100%;
     height: 230px;
+    object-fit:none;
 }
 
 .news-card {

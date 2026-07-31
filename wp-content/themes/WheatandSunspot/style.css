@@ -1060,7 +1060,7 @@ ol li p {
    お知らせページ（投稿ページ）
 ========================================== */
 .single-news img {
-    margin: 2rem 0;
+    margin: 2rem auto;
 }
 
 .single-news h3,

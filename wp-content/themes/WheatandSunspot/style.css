@@ -447,7 +447,7 @@ a:active {
 .logo-img {
     width: 100px;
     height: 100px;
-    margin-top: 2rem;
+   margin: 2rem auto 0;
 }
 
 .shop p {
